@@ -1,0 +1,16 @@
+- hosts: localhost
+  connection: local
+  tasks:
+    - name: launching ec2
+      ec2:
+       aws_access_key: "{{ lookup('env', 'AWS_ACCESS_KEY_ID')}}"
+       aws_secret_key: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY')}}"
+       instance_type: t2.micro
+       key_name: EssentialsKP
+       image: ami-0520e698dd500b1d1
+       region: us-east-2
+       group: default
+       count: 1
+       vpc_subnet_id: subnet-92f6fafa
+       wait: yes
+       assign_public_ip: yes
